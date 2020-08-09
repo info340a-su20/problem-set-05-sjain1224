@@ -91,8 +91,6 @@ function renderPaletteRow(colorArray, domParent){
   domParent.appendChild(colorDiv);
 }
 
-//let domElem = document.getElementById('content');
-//renderPaletteRow(COLORS_9.Reds, domElem);
 /* Define a function `renderPaletteTable()` that takes no arguments and renders 
 a color palette row for each of the palettes in the `COLORS_9` object into the 
 <main> element. This function should _call_ your `renderPaletteRow()` function 
