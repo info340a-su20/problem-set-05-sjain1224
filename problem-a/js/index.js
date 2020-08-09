@@ -83,17 +83,16 @@ You should NOT include any test calls when running Jest tests!
 */
 function renderPaletteRow(colorArray, domParent){
   let colorDiv = document.createElement('div');
-  let elem = document.querySelector(domParent);
-  let boxWidth = getElementWidth(elem) / colorArray.length;
+  let boxWidth = getElementWidth(domParent) / colorArray.length;
   for(let colorCode of colorArray){
     let colBox = createColorBox(colorCode, boxWidth);
     colorDiv.appendChild(colBox);
   }
-  elem.appendChild(colorDiv);
+  domParent.appendChild(colorDiv);
 }
 
-//renderPaletteRow(COLORS_9.Reds, '#content');
-
+//let domElem = document.getElementById('content');
+//renderPaletteRow(COLORS_9.Reds, domElem);
 /* Define a function `renderPaletteTable()` that takes no arguments and renders 
 a color palette row for each of the palettes in the `COLORS_9` object into the 
 <main> element. This function should _call_ your `renderPaletteRow()` function 
@@ -105,12 +104,13 @@ Tip: note that `COLORS_9` is an object, not an array! You'll need to use a
 Call your `renderPaletteTable()` method to display all the color palettes!
 */
 function renderPaletteTable(){
-  for(let colPalette in COLORS_9){
-    renderPaletteRow(colPalette, '#content');
+  let domElem = document.getElementById('content');
+  for(let colPalettes in COLORS_9){
+    renderPaletteRow(COLORS_9[colPalettes], domElem);
   }
 }
 
-//renderPaletteTable();
+renderPaletteTable();
 
 //Finally, remove the paragraph in the header that explains how to complete the 
 //problem.

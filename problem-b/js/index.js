@@ -1,6 +1,7 @@
 'use strict';
 
 //Create a variable `form` that refers to the `<form>` element in the DOM.
+let form = document.querySelector('form')
 
 /* Add an event listener to the `form` element that will listen for `'submit'` 
 type events (which occur when the form is submitted). In the callback function 
@@ -19,6 +20,20 @@ for this event listener, do the following:
      attribute a value of `true` (set the attribute directly with dot notation, 
      don't use `setAttribute()`).
 */
+
+let vaildForm;
+
+form.addEventListener('submit', function(event){
+  event.preventDefault();
+  vaildForm = form.checkValidity();
+  if (vaildForm === true){
+    form.classList.add('d-none');
+    document.querySelector('.alert').classList.remove('d-none');
+  } else {
+    form.classList.add('was-validated');
+    document.querySelector('button').disabled = true;
+  }
+})
 
 
 
