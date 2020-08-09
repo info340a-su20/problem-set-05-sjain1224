@@ -110,11 +110,12 @@ function renderPaletteTable(){
   }
 }
 
-renderPaletteTable();
+//renderPaletteTable();
 
 //Finally, remove the paragraph in the header that explains how to complete the 
 //problem.
-
+let docHeader = document.querySelector('p');
+docHeader.textContent = '';
 
 
 //Make functions and variables available to tester. DO NOT MODIFY THIS.
