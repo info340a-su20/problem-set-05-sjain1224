@@ -33,7 +33,7 @@ form.addEventListener('submit', function(event){
     form.classList.add('was-validated');
     document.querySelector('button').disabled = true;
   }
-})
+});
 
 
 
@@ -75,7 +75,16 @@ The "Date of Birth" should now show an error when empty or if the year is too
 recent; otherwise it should highlight as valid. Note that you'll need to hit
 "Sign me up!" first to enable the validation highlighting!
 */
-
+let dob = document.querySelector('#dobInput')
+dob.addEventListener('input', function(){
+  let userAge = getYearsSince(dob.value);
+  if(userAge < 13 || userAge > 200){
+    dob.setCustomValidity('You need to be at least 13 years old.');
+    document.querySelector('#dobFeedback').textContent = 'You need to be at least 13 years old.';
+  } else if(userAge >= 13){
+    dob.setCustomValidity('');
+  }
+})
 
 
 /* Next you'll make sure the two "password" fields match. Start by defining a
@@ -91,15 +100,26 @@ function `validatePasswordMatch()`. This function should access both password
   Also change the `#passwordConfirmFeedback` element so its `textContent` is
   also blank (an empty string).
 */
+let passOne = document.querySelector('#passwordInput');
+let passTwo = document.querySelector('#passwordConfirmInput');
 
+function validatePasswordMatch(){
+  if (passOne.value !== passTwo.value){
+    passTwo.setCustomValidity('Passwords do not match');
+    document.querySelector('#passwordConfirmFeedback').textContent = 'Passwords do not match';
+  } else if(passOne.value === passTwo.value){
+    passTwo.setCustomValidity('');
+    document.querySelector('#passwordConfirmFeedback').textContent = '';
+  }
+}
 
 
 /* Assign the `validatePasswordMatch` function as the callback for `input` 
 events that happen on BOTH the `#passwordInput` and `#passwordConfirmInput`
 elements. You can select the elements individually or using `querySelectorAll()`.
 */
-
-
+passOne.addEventListener('input', validatePasswordMatch);
+passTwo.addEventListener('input', validatePasswordMatch);
 
 /* Last you'll need to only enable the "submit" button if the form is valid. Use
 the `querySelectorAll()` method to select all 4 of the <input> elements. Use the
@@ -112,10 +132,21 @@ if the <form> element has the `was-validated` class. If so, set the button's
 This should disable the button until all of the fields are valid, but only after
 the user tries to submit once (which is a polite user experience)
 */
+let allInput = document.querySelectorAll('input');
+function checkNewVaild(place){
+  place.addEventListener('input', function(){
+    if(form.classList.contains('was-validated')){
+      document.querySelector('button').disabled = true;
+    } else {
+      document.querySelector('button').disabled = false;
+    }
+  })
+}
 
+allInput.forEach(checkNewVaild);
+ 
 
-
-
+    
 //Make functions and variables available to tester. DO NOT MODIFY THIS.
 if(typeof module !== 'undefined' && module.exports){
   /* eslint-disable */
